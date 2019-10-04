@@ -1,4 +1,14 @@
 # WrittenNumberCurrency
+<a href="https://img.shields.io/travis/mtkcs/written-number-currency?style=plastic">
+    <img src="https://img.shields.io/travis/mtkcs/written-number-currency?style=plastic">
+</a>
+<a href="https://img.shields.io/npm/v/@mtkcs/written-number-currency?style=plastic">
+    <img src="https://img.shields.io/npm/v/@mtkcs/written-number-currency?style=plastic">
+</a>
+<a href="https://img.shields.io/bundlephobia/minzip/@mtkcs/written-number-currency?style=plastic">
+    <img src="https://img.shields.io/bundlephobia/minzip/@mtkcs/written-number-currency?style=plastic" >
+</a>
+
 
 # Installation
 ```
