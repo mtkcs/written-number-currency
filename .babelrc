@@ -1,0 +1,8 @@
+{
+  "env": {
+    "production": { "presets": [["@babel/env"]] },
+    "test": {
+      "presets": [["@babel/env", { "modules": "auto" }]]
+    }
+  }
+}
