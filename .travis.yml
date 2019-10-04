@@ -12,6 +12,8 @@ branches:
     - master
 notifications:
   email: false
+install:
+  - npm i
 script:
   - npm run test
   - npm run build
