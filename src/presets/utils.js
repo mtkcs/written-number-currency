@@ -1,4 +1,4 @@
-export function getLastTwoDigits(number) {
+function getLastTwoDigits(number) {
   const str = String(number);
   const { length } = str;
   const result = str.slice(length - 2, length);
@@ -7,3 +7,4 @@ export function getLastTwoDigits(number) {
   }
   return result;
 }
+module.exports.getLastTwoDigits = getLastTwoDigits;

@@ -1,7 +1,7 @@
-import invariant from "invariant";
-import writtenNumber from "written-number/lib/standalone";
+const invariant = require("invariant");
+const writtenNumber = require("written-number/lib/standalone");
 
-export function writtenNumberCurrency(config = {}) {
+function writtenNumberCurrency(config = {}) {
   const {
     lang,
     baseUnitAmount: baseUnitAmountArg,
@@ -60,7 +60,7 @@ function format(amount, formatter) {
 
 function validateFunction(n, name) {
   if (typeof n !== "function") {
-    invariant(`config.${name} should be a valid function`);
+    invariant(false, `config.${name} should be a valid function`);
   }
 }
 function prepareNumber(n, name) {
@@ -76,4 +76,4 @@ function prepareNumber(n, name) {
   return Math.round(n);
 }
 
-export default writtenNumberCurrency;
+module.exports = writtenNumberCurrency;

@@ -15,4 +15,4 @@ function format(amount, c1, c2) {
   return c2;
 }
 
-export default preset;
+module.exports = preset;
