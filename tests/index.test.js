@@ -7,10 +7,10 @@ import frDinarPreset from "../src/presets/fr-dinar";
 import arDinarPreset from "../src/presets/ar-dinar";
 
 var defaultPreset = {
-  baseUnitFormatter() {
+  amountFormatter() {
     return "";
   },
-  smallUnitFormatter(amount) {
+  precisionFormatter(amount) {
     return "";
   }
 };
@@ -28,22 +28,22 @@ test("requires baseAmount or a smallAmount", t => {
 
   t.throws(() =>
     instance({
-      baseUnitAmount: null,
-      smallUnitAmount: null
+      amount: null,
+      precision: null
     })
   );
 
   t.truthy(
     instance({
-      baseUnitAmount: 0,
-      smallUnitAmount: null
+      amount: 0,
+      precision: null
     })
   );
 
   t.truthy(
     instance({
-      baseUnitAmount: null,
-      smallUnitAmount: 0
+      amount: null,
+      precision: 0
     })
   );
 });
@@ -51,64 +51,64 @@ test("requires baseAmount or a smallAmount", t => {
 test("for each type of amount it requires its formatter", t => {
   var instance = writtenNumberCurrency({
     ...validConfig,
-    baseUnitFormatter: undefined
+    amountFormatter: undefined
   });
   t.throws(() =>
     instance({
-      baseUnitAmount: 12
+      amount: 12
     })
   );
 
   instance = writtenNumberCurrency({
     ...validConfig,
-    smallUnitFormatter: undefined
+    precisionFormatter: undefined
   });
   t.throws(() =>
     instance({
-      smallUnitAmount: 12
+      precision: 12
     })
   );
 });
 
 test("throws an error with negative value(s) frDinar -1 0", t => {
   const instance = writtenNumberCurrency({ ...validConfig, ...frDinarPreset });
-  t.throws(() => instance({ baseUnitAmount: -1, smallUnitAmount: 0 }));
+  t.throws(() => instance({ amount: -1, precision: 0 }));
 });
 
 // ************************************** preset frDinar
 test("preset frDinar 0 0", t => {
   const instance = writtenNumberCurrency({ ...validConfig, ...frDinarPreset });
-  const result = instance({ baseUnitAmount: 0, smallUnitAmount: 0 });
+  const result = instance({ amount: 0, precision: 0 });
   t.is(result, "zéro dinars et zéro millimes");
 });
 
 test("preset frDinar 0 undefined", t => {
   const instance = writtenNumberCurrency({ ...validConfig, ...frDinarPreset });
-  const result = instance({ baseUnitAmount: 0 });
+  const result = instance({ amount: 0 });
   t.is(result, "zéro dinars");
 });
 
 test("preset frDinar undefined 0", t => {
   const instance = writtenNumberCurrency({ ...validConfig, ...frDinarPreset });
-  const result = instance({ smallUnitAmount: 0 });
+  const result = instance({ precision: 0 });
   t.is(result, "zéro millimes");
 });
 
 test("preset frDinar undefined 998", t => {
   const instance = writtenNumberCurrency({ ...validConfig, ...frDinarPreset });
-  const result = instance({ smallUnitAmount: 998 });
+  const result = instance({ precision: 998 });
   t.is(result, "neuf cent quatre-vingt-dix-huit millimes");
 });
 
 test("preset frDinar 1339 1", t => {
   const instance = writtenNumberCurrency({ ...validConfig, ...frDinarPreset });
-  const result = instance({ baseUnitAmount: 1339, smallUnitAmount: 1 });
+  const result = instance({ amount: 1339, precision: 1 });
   t.is(result, "mille trois cent trente-neuf dinars et un millime");
 });
 
 test("preset frDinar 112400331 101", t => {
   const instance = writtenNumberCurrency({ ...validConfig, ...frDinarPreset });
-  const result = instance({ baseUnitAmount: 112400331, smallUnitAmount: 101 });
+  const result = instance({ amount: 112400331, precision: 101 });
   t.is(
     result,
     "cent douze millions quatre cents mille trois cent trente et un dinars et cent un millimes"
@@ -122,7 +122,7 @@ test("preset arDinar 0 0", t => {
     ...arDinarPreset,
     lang: ar
   });
-  const result = instance({ baseUnitAmount: 0, smallUnitAmount: 0 });
+  const result = instance({ amount: 0, precision: 0 });
   t.is(result, "صفر دينار و صفر مليم");
 });
 test("preset arDinar 1013 2", t => {
@@ -131,7 +131,7 @@ test("preset arDinar 1013 2", t => {
     ...arDinarPreset,
     lang: ar
   });
-  const result = instance({ baseUnitAmount: 1013, smallUnitAmount: 2 });
+  const result = instance({ amount: 1013, precision: 2 });
   t.is(result, "ألف وثلاثة عشر دينار و اثنان مليم");
 });
 
@@ -141,7 +141,7 @@ test("preset arDinar 993013 107", t => {
     ...arDinarPreset,
     lang: ar
   });
-  const result = instance({ baseUnitAmount: 993013, smallUnitAmount: 107 });
+  const result = instance({ amount: 993013, precision: 107 });
   t.is(
     result,
     "تسعمائة وثلاثة وتسعون ألف وثلاثة عشر دينار و مائة وسبعة مليمات"

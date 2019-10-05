@@ -33,9 +33,9 @@ const fr = require('written-number/lib/i18n/fr.json');
 const instance = wnc({lang: fr, ...frDinarPresets});
 
 // If we want to get the string representation of 1234 Dinar and 23 millimes (1234.023)
-// baseUnitAmount = 1234: amount in dollars (euros, dinars, ...)
-// smallUnitAmont = 23: amount in cents (centimes, millimes, ...)
-const result = instance({baseUnitAmount: 1234, smallUnitAmount: 23});
+// amount = 1234: amount in dollars (euros, dinars, ...)
+// precision = 23: amount in cents (centimes, millimes, ...)
+const result = instance({amount: 1234, precision: 23});
 
 console.log(result);
 // => mille deux cent trente-quatre dinars et vingt-trois millimes
@@ -44,26 +44,26 @@ console.log(result);
 ## WrittenNumberCurrency
 The arguments are:
 - `lang`: **Object**|*required*. A `written-number` valid language object.
-- `linker`: **String**|*optional*. The word that links between the **baseUnitAmount** and the **smallUnitAmount**
-- `baseUnitFormatter`: **Function**|*required* if `baseUnitAmount` is provided. Function that accepts an amount
+- `linker`: **String**|*optional*. The word that links between the **amount** and the **precision**
+- `amountFormatter`: **Function**|*required* if `amount` is provided. Function that accepts an amount
  an returns the correct grammatical form of the base currency.
-- `smallUnitFormatter`: **Function**|*required* if `smallUnitAmount` is provided. Function that accepts an amount
+- `precisionFormatter`: **Function**|*required* if `precision` is provided. Function that accepts an amount
  an returns the correct grammatical form of the small currency.
 ## Presets
 Presets are objects that should contain 3 keys:
 `linker`
-`baseUnitFormatter`
-`smallUnitFormatter`
+`amountFormatter`
+`precisionFormatter`
 ##### Example:
 ```javascript
 // presets/en-dollar.js
 const preset = {
   linker: 'and',
-  baseUnitFormatter(amount) {
+  amountFormatter(amount) {
     if (amount === 1) return 'dollar';
     return 'dollars';
   },
-  smallUnitFormatter(amount) {
+  precisionFormatter(amount) {
     if (amount === 1) return 'cent';
     return 'cents';
   },
@@ -71,8 +71,8 @@ const preset = {
 ```
 ## Instance returned by WrittenNumberCurrency 
 The arguments are:
-- `baseUnitAmount`: **Positive Integer**|*required* if `smallUnitAmount` was **not** provided. The base currency of your choice, ex: dollar, euro, dinar...
-- `smallUnitAmount`: **Positive Integer**|*required* if `baseUnitAmount` was **not** provided. The small currency of your choice, ex: cent, millime, centime...
+- `amount`: **Positive Integer**|*required* if `precision` was **not** provided. The base currency of your choice, ex: dollar, euro, dinar...
+- `precision`: **Positive Integer**|*required* if `amount` was **not** provided. The small currency of your choice, ex: cent, millime, centime...
 
 # Licence
 MIT

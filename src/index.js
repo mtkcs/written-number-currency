@@ -4,47 +4,47 @@ const writtenNumber = require("written-number/lib/standalone");
 function writtenNumberCurrency(config = {}) {
   const {
     lang,
-    baseUnitAmount: baseUnitAmountArg,
-    smallUnitAmount: smallUnitAmountArg,
-    baseUnitFormatter,
+    amount: amountArg,
+    precision: precisionArg,
+    amountFormatter,
     linker = "",
-    smallUnitFormatter
+    precisionFormatter
   } = config || {};
   invariant(lang, `config.lang is required`);
 
   writtenNumber.defaults.lang = lang;
 
   return function({
-    baseUnitAmount: baseUnitAmountArg,
-    smallUnitAmount: smallUnitAmountArg
+    amount: amountArg,
+    precision: precisionArg
   } = {}) {
-    let baseUnitAmount, smallUnitAmount;
+    let amount, precision;
 
-    if (baseUnitAmountArg == null && smallUnitAmountArg != null) {
-      smallUnitAmount = prepareNumber(smallUnitAmountArg, "smallUnitAmount");
-      validateFunction(smallUnitFormatter, "smallUnitFormatter");
-    } else if (baseUnitAmountArg != null && smallUnitAmountArg == null) {
-      baseUnitAmount = prepareNumber(baseUnitAmountArg, "baseUnitAmount");
-      validateFunction(baseUnitFormatter, "baseUnitFormatter");
-    } else if (baseUnitAmountArg == null && smallUnitAmountArg == null) {
-      invariant("Please provide a baseUnitAmount or a smallUnitAmount");
+    if (amountArg == null && precisionArg != null) {
+      precision = prepareNumber(precisionArg, "precision");
+      validateFunction(precisionFormatter, "precisionFormatter");
+    } else if (amountArg != null && precisionArg == null) {
+      amount = prepareNumber(amountArg, "amount");
+      validateFunction(amountFormatter, "amountFormatter");
+    } else if (amountArg == null && precisionArg == null) {
+      invariant("Please provide a amount or a precision");
     } else {
-      baseUnitAmount = prepareNumber(baseUnitAmountArg, "baseUnitAmount");
-      smallUnitAmount = prepareNumber(smallUnitAmountArg, "smallUnitAmount");
-      validateFunction(baseUnitFormatter, "baseUnitFormatter");
-      validateFunction(smallUnitFormatter, "smallUnitFormatter");
+      amount = prepareNumber(amountArg, "amount");
+      precision = prepareNumber(precisionArg, "precision");
+      validateFunction(amountFormatter, "amountFormatter");
+      validateFunction(precisionFormatter, "precisionFormatter");
     }
 
-    if (baseUnitAmount == null) {
-      return format(smallUnitAmount, smallUnitFormatter);
+    if (amount == null) {
+      return format(precision, precisionFormatter);
     }
-    if (smallUnitAmount == null) {
-      return format(baseUnitAmount, baseUnitFormatter);
+    if (precision == null) {
+      return format(amount, amountFormatter);
     }
 
     return link(
-      format(baseUnitAmount, baseUnitFormatter),
-      format(smallUnitAmount, smallUnitFormatter),
+      format(amount, amountFormatter),
+      format(precision, precisionFormatter),
       linker
     );
   };

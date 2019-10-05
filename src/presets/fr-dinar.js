@@ -1,9 +1,9 @@
 var preset = {
   linker: "et",
-  baseUnitFormatter(amount) {
+  amountFormatter(amount) {
     return format(amount, "dinar", "dinars");
   },
-  smallUnitFormatter(amount) {
+  precisionFormatter(amount) {
     return format(amount, "millime", "millimes");
   }
 };

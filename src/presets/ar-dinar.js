@@ -2,10 +2,10 @@ const { getLastTwoDigits } = require("./utils");
 
 const preset = {
   linker: "و",
-  baseUnitFormatter(amount) {
+  amountFormatter(amount) {
     return format(amount, "دنانير", "دينار");
   },
-  smallUnitFormatter(amount) {
+  precisionFormatter(amount) {
     return format(amount, "مليمات", "مليم");
   }
 };
