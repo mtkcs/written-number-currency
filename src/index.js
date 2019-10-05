@@ -27,7 +27,7 @@ function writtenNumberCurrency(config = {}) {
       amount = prepareNumber(amountArg, "amount");
       validateFunction(amountFormatter, "amountFormatter");
     } else if (amountArg == null && precisionArg == null) {
-      invariant("Please provide a amount or a precision");
+      invariant(false, "Please provide a amount or a precision");
     } else {
       amount = prepareNumber(amountArg, "amount");
       precision = prepareNumber(precisionArg, "precision");
