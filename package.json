@@ -1,6 +1,6 @@
 {
   "name": "@mtkcs/written-number-currency",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "Convert money amounts to words using a chosen currency",
   "keywords": [
     "written",
